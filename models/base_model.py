@@ -22,7 +22,11 @@ class BaseModel:
 
     def to_dict(self):
         """update and return __dict__"""
-        iso_updated = self.updated_at.isoformat()
-        iso_created = self.created_at.isoformat()
+        self.updated_at = self.updated_at.isoformat()
+
+        self.created_at = self.created_at.isoformat()
+     
         self.__dict__["__class__"] = self.__class__.__name__
+        for key, value in self.__dict__.items():
+            print(f"{key}: ({type(value)}) - {value}")
         return self.__dict__
