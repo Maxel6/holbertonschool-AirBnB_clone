@@ -3,12 +3,13 @@ import uuid
 import datetime
 """Base models"""
 
+
 class BaseModel:
     """base class"""
 
     def __init__(self):
-        """Initialize instance"""     
-        self.id = str(uuid.uuid4())   
+        """Initialize instance"""
+        self.id = str(uuid.uuid4())
         self.updated_at = datetime.datetime.now()
         self.created_at = datetime.datetime.now()
 
@@ -25,5 +26,5 @@ class BaseModel:
         self.__dict__['created_at'] = self.created_at.isoformat()
         self.__dict__['updated_at'] = self.updated_at.isoformat()
         self.__dict__["__class__"] = self.__class__.__name__
-        
+
         return self.__dict__
