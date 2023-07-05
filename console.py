@@ -9,7 +9,7 @@ class HBNBCommand(cmd.Cmd):
     Returns:
         cmd: opens a custom shell
     """
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
 
     def do_hello(self, arg):
         """Print a greeting"""
