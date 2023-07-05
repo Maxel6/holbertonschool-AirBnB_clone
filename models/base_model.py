@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
+import models.engine.file_storage
 """Base models"""
 
 
@@ -22,6 +23,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """return the string representation"""
@@ -31,6 +33,7 @@ class BaseModel:
     def save(self):
         """Update the date variable"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """turns instance into dict
