@@ -35,7 +35,7 @@ class BaseModel:
         Returns:
             dict: dict form of instance
         """
-        copy_dict = self.__dict__.copy()      
+        copy_dict = self.__dict__.copy()
         copy_dict['__class__'] = type(self).__name__
         if not isinstance(copy_dict['created_at'], str):
             copy_dict['created_at'] = self.created_at.isoformat()
