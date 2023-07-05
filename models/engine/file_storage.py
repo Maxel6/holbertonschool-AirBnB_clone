@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """class to serialize and deserialize"""
 import json
+import os
 
 
 class FileStorage:
@@ -19,8 +20,8 @@ class FileStorage:
             json.dump(self.__objects, output_file)
 
     def reload(self):
-        with open(self.__file_path, 'r') as input_file:
-            if file:
+        if os.path.isfile(FileStorage.__file_path):
+            with open(self.__file_path, 'r') as input_file:
                 self.__objects = json.load(input_file)
-            else:
-                pass
+        else:
+            pass
