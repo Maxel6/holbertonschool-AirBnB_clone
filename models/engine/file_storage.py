@@ -4,7 +4,7 @@ import json
 
 
 class FileStorage:
-    __file_path = "file.json"
+    __file_path = 'file.json'
     __objects = {}
 
     def all(self):
@@ -15,12 +15,12 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        with open(self.__file_path, 'w') as file:
-            json.dump(self.__objects, file)
+        with open(self.__file_path, 'w', encoding='utf-8') as output_file:
+            json.dump(self.__objects, output_file)
 
     def reload(self):
-        with open(self.__file_path, 'r') as file:
+        with open(self.__file_path, 'r') as input_file:
             if file:
-                self.__objects = json.load(file)
+                self.__objects = json.load(input_file)
             else:
                 pass
