@@ -36,9 +36,13 @@ class HBNBCommand(cmd.Cmd):
         if arg == "hello":
             print("Greets you in the most pleasing way a dev could hope for.")
         if arg == "quit" or arg == "EOF":
-            print("Rudely leaves the room.")
-        if arg == "help":
-            print("Sends godblessed help to your rescue.")
+            print("Quit command to exit the program\n")
+        else:
+            print()
+            print("Documented commands (type help <topic>:\n\
+========================================\n\
+EOF  help  quit\n")
+
 
 
 if __name__ == '__main__':
