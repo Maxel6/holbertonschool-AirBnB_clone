@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
-import models.engine.file_storage
 """Base models"""
 
 
@@ -10,6 +9,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Initialize instance"""
+        from models.engine.file_storage import FileStorage
         if kwargs:
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
@@ -23,7 +23,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            models.storage.new(self)
+            FileStorage().new(self)
 
     def __str__(self):
         """return the string representation"""
@@ -32,6 +32,7 @@ class BaseModel:
 
     def save(self):
         """Update the date variable"""
+        import models
         self.updated_at = datetime.now()
         models.storage.save()
 

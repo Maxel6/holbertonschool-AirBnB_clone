@@ -16,20 +16,29 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        jsoned_obj = {}
-        for key, obj in self.__objects.items():
-            jsoned_obj[key] = obj.to_dict()
-        with open(self.__file_path, 'w', encoding='utf-8') as output_file:
-            json.dump(jsoned_obj, output_file)
+        """
+            Serialize __objects to the JSON file.
+        """
+        obj_list = {}
+        for k, v in self.__objects.items():
+            obj_list[k] = v.to_dict()
+        with open(FileStorage.__file_path, "w", encoding='utf-8') as out_file:
+            json.dump(obj_list, out_file)
 
     def reload(self):
+        from models import base_model
         if os.path.isfile(self.__file_path):
-            with open(self.__file_path, 'r') as input_file:
-                jsoned_obj = json.load(input_file)
+            with open(self.__file_path, 'r', encoding='utf-8') as input_file:
+                try:
+                    jsoned_obj = json.load(input_file)
+                except json.JSONDecodeError:
+                    pass
                 for key, value in jsoned_obj.items():
-                    class_name, obj_id = key.split('.')
-                    class_obj = eval(class_obj["__class__"])(**class_obj)
-                    instance = class_obj(**value)
-                    self.__objects[key] = instance
+                    class_name = value['__class__']
+                    class_obj = getattr(base_model, class_name)
+
+                    obj = class_obj(**value)
+                    self.__objects[key] = obj
+                    self.new(obj)
         else:
             pass
