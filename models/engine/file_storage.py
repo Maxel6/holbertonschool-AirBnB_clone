@@ -5,13 +5,29 @@ import os
 
 
 class FileStorage:
+    """Class used to store datas
+
+    Returns:
+        class: multiples methods to deal with instances and stock them in json
+        files
+    """
     __file_path = 'file.json'
     __objects = {}
 
     def all(self):
+        """returns objects of instance
+
+        Returns:
+            dict: dict to be inspected
+        """
         return self.__objects
 
     def new(self, obj):
+        """creates new instance in dict
+
+        Args:
+            obj (dict): new dict form from instance
+        """
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[key] = obj
 
@@ -26,9 +42,12 @@ class FileStorage:
             json.dump(obj_list, out_file)
 
     def reload(self):
+        """serializes and deserializes instances from json form
+        """
         from models import base_model
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, 'r', encoding='utf-8') as input_file:
+                jsoned_obj = {}
                 try:
                     jsoned_obj = json.load(input_file)
                 except json.JSONDecodeError:

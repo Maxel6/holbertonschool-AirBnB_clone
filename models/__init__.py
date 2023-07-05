@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-    creates storage variable
-"""
+"""Creates storage variable."""
 from models.engine.file_storage import FileStorage
 
 storage = FileStorage()

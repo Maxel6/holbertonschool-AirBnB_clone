@@ -1,14 +1,15 @@
 #!/usr/bin/python3
+"""module to store main class."""
 import uuid
 from datetime import datetime
 """Base models"""
 
 
 class BaseModel:
-    """base class"""
+    """base class."""
 
     def __init__(self, *args, **kwargs):
-        """Initialize instance"""
+        """Initialize instance."""
         from models.engine.file_storage import FileStorage
         if kwargs:
             for key, value in kwargs.items():
@@ -26,18 +27,18 @@ class BaseModel:
             FileStorage().new(self)
 
     def __str__(self):
-        """return the string representation"""
+        """Return the string representation."""
         return ("[{}] ({}) {}".format(type(self).__name__,
                                       self.id, self.__dict__))
 
     def save(self):
-        """Update the date variable"""
+        """Update the date variable."""
         import models
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """turns instance into dict
+        """Turn instance into dict.
 
         Returns:
             dict: dict form of instance
