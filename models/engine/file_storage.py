@@ -42,9 +42,9 @@ class FileStorage:
             json.dump(obj_list, out_file)
 
     def reload(self):
-        """serializes and deserializes instances from json form
-        """
-        from models import base_model
+        """serializes and deserializes instances from json form"""
+        from models.user import User
+        from models.base_model import BaseModel
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, 'r', encoding='utf-8') as input_file:
                 jsoned_obj = {}
@@ -54,10 +54,11 @@ class FileStorage:
                     pass
                 for key, value in jsoned_obj.items():
                     class_name = value['__class__']
-                    class_obj = getattr(base_model, class_name)
+                    if class_name == 'User':
+                        class_obj = User
+                    else:
+                        class_obj = BaseModel
 
                     obj = class_obj(**value)
                     self.__objects[key] = obj
                     self.new(obj)
-        else:
-            pass

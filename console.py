@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """module to handle console"""
 import cmd
-
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -13,6 +13,15 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = '(hbnb) '
     created_instance = ()
+
+    def __init__(self):
+        super().__init__()
+        self.prompt = '(hbnb) '
+        self.created_instance = ()
+        self.classes = {
+            'BaseModel': BaseModel,
+            'User': User,
+        }
 
     def do_hello(self, arg):
         """Print a greeting"""
@@ -31,19 +40,16 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        from models.base_model import BaseModel
         if len(arg) < 1:
             print("** class name missing **")
         else:
-            try:
-                cls = globals()[arg]
-                if isinstance(cls, type):
-                    self.created_instance = cls()
-                    print(self.created_instance.id)
-                    self.created_instance.save()
-                else:
-                    print("** class doesn't exist **")
-            except KeyError:
+            class_name = arg.split()[0]
+            if class_name in self.classes:
+                cls = self.classes[class_name]
+                self.created_instance = cls()
+                print(self.created_instance.id)
+                self.created_instance.save()
+            else:
                 print("** class doesn't exist **")
 
     def do_show(self, arg):
@@ -100,7 +106,6 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** class doesn't exist **")
 
-    
     def do_all(self, arg):
         from models.engine.file_storage import FileStorage
 
@@ -114,7 +119,10 @@ class HBNBCommand(cmd.Cmd):
             try:
                 cls = globals()[class_name]
                 if isinstance(cls, type):
-                    filtered_instances = [str(instance) for instance in instances.values() if isinstance(instance, cls)]
+                    filtered_instances = [
+                        str(instance)
+                        for instance in instances.values()
+                        ]
                     print(filtered_instances)
                 else:
                     print("** class doesn't exist **")
@@ -146,11 +154,14 @@ class HBNBCommand(cmd.Cmd):
                 key = class_name + "." + instance_id
                 if key in instances:
                     instance = instances[key]
-                    if attribute_name not in ["id", "created_at", "updated_at"]:
-                        setattr(instance, attribute_name, type(attribute_value)(attribute_value))
+                    if attribute_name not in ["id",
+                                              "created_at", "updated_at"]:
+                        setattr(instance, attribute_name,
+                                type(attribute_value)(attribute_value))
                         FileStorage().save()
                     else:
-                        print("** cannot update '{}' attribute **".format(attribute_name))
+                        print("** cannot update '{}' attribute **"
+                              .format(attribute_name))
                 else:
                     print("** no instance found **")
             else:
@@ -158,19 +169,18 @@ class HBNBCommand(cmd.Cmd):
         except KeyError:
             print("** class doesn't exist **")
 
-       
-
-
     def do_help(self, arg):
         """Affiche l'aide pour les commandes."""
         commands = {
-            "hello": "Greets you in the most pleasing way a dev could hope for.",
+            "hello": "Greets you in the most pleasing way \
+                a dev could hope for.",
             "quit": "Quit command to exit the program.",
             "EOF": "Quit command to exit the program.",
             "create": "Create a new instance of a class.",
             "show": "Print the string representation of an instance.",
             "destroy": "Delete an instance based on the class name and ID.",
-            "all": "Print string representations of all instances (filtered by class name if provided)."
+            "all": "Print string representations of all \
+                instances (filtered by class name if provided)."
         }
 
         if arg:
@@ -182,7 +192,6 @@ class HBNBCommand(cmd.Cmd):
             print("Documented commands (type help <command>):")
             for command, description in commands.items():
                 print(f"{command:<10} {description}")
-
 
 
 if __name__ == '__main__':
