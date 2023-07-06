@@ -134,7 +134,8 @@ class HBNBCommand(cmd.Cmd):
                     filtered_instances = [
                         str(instance)
                         for instance in instances.values()
-                        ]
+                        if isinstance(instance, cls)
+                    ]
                     print(filtered_instances)
                 else:
                     print("** class doesn't exist **")
