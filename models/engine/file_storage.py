@@ -2,6 +2,13 @@
 """class to serialize and deserialize"""
 import json
 import os
+from models.base_model import BaseModel
+from models.review import Review
+from models.place import Place
+from models.user import User
+from models.state import State
+from models.amenity import Amenity
+from models.city import City
 
 
 class FileStorage:
@@ -32,33 +39,30 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        """
-            Serialize __objects to the JSON file.
-        """
+        """Serializes __objects to JSON file"""
         obj_list = {}
         for k, v in self.__objects.items():
             obj_list[k] = v.to_dict()
-        with open(FileStorage.__file_path, "w", encoding='utf-8') as out_file:
-            json.dump(obj_list, out_file)
+        with open(FileStorage.__file_path, "w", encoding='utf-8') as file:
+            json.dump(obj_list, file)
 
     def reload(self):
-        """serializes and deserializes instances from json form"""
-        from models.user import User
-        from models.base_model import BaseModel
+        """Deserializes JSON file to __objects"""
+        classes = {
+            'BaseModel': BaseModel,
+            'User': User,
+            'Place': Place,
+            'State': State,
+            'City': City,
+            'Amenity': Amenity,
+            'Review': Review
+        }
         if os.path.isfile(self.__file_path):
-            with open(self.__file_path, 'r', encoding='utf-8') as input_file:
-                jsoned_obj = {}
-                try:
-                    jsoned_obj = json.load(input_file)
-                except json.JSONDecodeError:
-                    pass
-                for key, value in jsoned_obj.items():
+            with open(self.__file_path, 'r', encoding='utf-8') as file:
+                data = json.load(file)
+                for key, value in data.items():
                     class_name = value['__class__']
-                    if class_name == 'User':
-                        class_obj = User
-                    else:
-                        class_obj = BaseModel
-
-                    obj = class_obj(**value)
-                    self.__objects[key] = obj
-                    self.new(obj)
+                    if class_name in classes:
+                        cls = classes[class_name]
+                        obj = cls(**value)
+                        self.__objects[key] = obj
