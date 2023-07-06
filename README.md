@@ -1,6 +1,4 @@
-Certainly! Here's the README with Markdown formatting:
 
-```
 # AirBnB Clone Console
 
 This project is a simplified version of the AirBnB application, developed as part of the Holberton School training. It is a command-line console that allows users to manage and manipulate AirBnB-related objects, such as users, accommodations, reservations, etc.
