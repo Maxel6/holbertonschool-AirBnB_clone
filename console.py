@@ -49,13 +49,27 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         from models.base_model import BaseModel
         arg = arg.split()
-        show_id = arg[1]
-        show_class = globals()[arg[0]]
-        
-        print(show_class.__str__(show_class))
-        for k, v in show_class.__dict__.items():
-            if v == show_id:
-                print("bite")
+        if len(arg) < 2:
+            print("** class name missing **")
+            return
+        class_name = arg[0]
+        instance_id = arg[1]
+        try:
+            cls = globals()[class_name]
+            if isinstance(cls, type):
+                from models.engine.file_storage import FileStorage
+                instances = FileStorage().all()
+                key = class_name + "." + instance_id
+                if key in instances:
+                    instance = instances[key]
+                    print(instance)
+                else:
+                    print("** no instance found **")
+            else:
+                print("** class doesn't exist **")
+        except KeyError:
+            print("** class doesn't exist **")
+
 
     def do_help(self, arg):
         """gives little man
