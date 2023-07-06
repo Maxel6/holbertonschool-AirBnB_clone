@@ -193,7 +193,8 @@ class HBNBCommand(cmd.Cmd):
             "show": "Print the string representation of an instance.",
             "destroy": "Delete an instance based on the class name and ID.",
             "all": "Print string representations of all \
-                instances (filtered by class name if provided)."
+                instances (filtered by class name if provided).",
+            "update": "Update the attributes of a specific object."
         }
 
         if arg:
