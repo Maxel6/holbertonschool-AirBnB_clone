@@ -12,6 +12,7 @@ class HBNBCommand(cmd.Cmd):
         cmd: opens a custom shell
     """
     prompt = '(hbnb) '
+    created_instance = ()
 
     def do_hello(self, arg):
         """Print a greeting"""
@@ -30,16 +31,31 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        if arg is None:
+        from models.base_model import BaseModel
+        if len(arg) < 1:
             print("** class name missing **")
+        else:
             try:
                 cls = globals()[arg]
                 if isinstance(cls, type):
-                    print("The class {} exists.".format(arg))
+                    self.created_instance = cls()
+                    print(self.created_instance.id)
+                    self.created_instance.save()
                 else:
-                    print("{} is not a class.".format(arg))
+                    print("** class doesn't exist **")
             except KeyError:
-                print(f"The class {arg} does not exist.")
+                print("** class doesn't exist **")
+
+    def do_show(self, arg):
+        from models.base_model import BaseModel
+        arg = arg.split()
+        show_id = arg[1]
+        show_class = globals()[arg[0]]
+        
+        print(show_class.__str__(show_class))
+        for k, v in show_class.__dict__.items():
+            if v == show_id:
+                print("bite")
 
     def do_help(self, arg):
         """gives little man
