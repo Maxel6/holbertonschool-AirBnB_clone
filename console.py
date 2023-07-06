@@ -9,6 +9,8 @@ from models.state import State
 from models.amenity import Amenity
 from models.city import City
 
+"""HBNB Console 1.0"""
+
 
 class HBNBCommand(cmd.Cmd):
     """Class tro handle the custom prompt
