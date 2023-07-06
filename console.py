@@ -35,9 +35,9 @@ class HBNBCommand(cmd.Cmd):
             try:
                 cls = globals()[arg]
                 if isinstance(cls, type):
-                    print(f"The class {arg} exists.")
+                    print("The class {} exists.".format(arg))
                 else:
-                    print(f"{arg} is not a class.")
+                    print("{} is not a class.".format(arg))
             except KeyError:
                 print(f"The class {arg} does not exist.")
 
