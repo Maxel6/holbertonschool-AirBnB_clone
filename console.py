@@ -2,6 +2,8 @@
 """module to handle console"""
 import cmd
 
+from models.base_model import BaseModel
+
 
 class HBNBCommand(cmd.Cmd):
     """Class tro handle the custom prompt
@@ -26,6 +28,18 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing when an empty line is entered"""
         pass
+
+    def do_create(self, arg):
+        if arg is None:
+            print("** class name missing **")
+            try:
+                cls = globals()[arg]
+                if isinstance(cls, type):
+                    print(f"The class {arg} exists.")
+                else:
+                    print(f"{arg} is not a class.")
+            except KeyError:
+                print(f"The class {arg} does not exist.")
 
     def do_help(self, arg):
         """gives little man
