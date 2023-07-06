@@ -1,4 +1,9 @@
+#!/usr/bin/python3
+"""module to store main class."""
 from models.base_model import BaseModel
+
+"""Place models"""
+
 
 class Place(BaseModel):
     """Place class"""
