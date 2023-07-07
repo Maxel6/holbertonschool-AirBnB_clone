@@ -21,18 +21,18 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     created_instance = ()
 
-    def __init__(self):
-        super().__init__()
-        self.prompt = '(hbnb) '
-        self.created_instance = ()
-        self.classes = {
-            'BaseModel': BaseModel,
-            'User': User,
-            'Place': Place,
-            'State': State,
-            'City': City,
-            'Amenity': Amenity,
-            'Review': Review
+    def __init__(self, args, **kwargs):
+            super().__init__(args, **kwargs)
+            self.prompt = '(hbnb) '
+            self.created_instance = ()
+            self.classes = {
+                'BaseModel': BaseModel,
+                'User': User,
+                'Place': Place,
+                'State': State,
+                'City': City,
+                'Amenity': Amenity,
+                'Review': Review
         }
 
     def do_hello(self, arg):
@@ -208,5 +208,3 @@ class HBNBCommand(cmd.Cmd):
                 print(f"{command:<10} {description}")
 
 
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
