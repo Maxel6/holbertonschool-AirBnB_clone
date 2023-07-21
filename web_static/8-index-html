@@ -1,0 +1,154 @@
+<!Doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>AirBnB clone</title>
+        <link rel="stylesheet" href="./styles/4-common.css">
+        <link rel="stylesheet" href="./styles/6-filters.css">
+        <link rel="stylesheet" href="./styles/3-header.css">
+        <link rel="stylesheet" href="./styles/3-footer.css">
+        <link rel="stylesheet" href="./styles/8-places.css">
+        <link rel="icon" type="image/png" href="images/icon.png">
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="container">
+            <section class="filters">
+                <div class="locations">
+                    <h3>States</h3>
+                    <h4>California, Arizona...</h4>
+                    <ul class="popover">
+                            <li>
+                                <h2>Arizona:</h2></li>
+                            <li>Page</li>
+                            <li>Page2</li>
+                            <li class="cities">
+                                <h2>California:</h2></li>
+                            <li>San Francisco</li>
+                            <li>Los Altos</li>
+                    </ul>
+                </div>
+                <div class="amenities">
+                    <h3>Amenities</h3>
+                    <h4>Internet, Kitchen...</h4>
+                    <ul class="popover">
+                        <li>Internet</li>
+                        <li>TV</li>
+                        <li>Kitchen</li>
+                        <li>Iron</li>
+                    </ul>
+                </div>
+                <button>Search</button>
+            </section>
+            <section class="places">
+                <h1>Places</h1>
+                    <article><h2>My home</h2>
+                        <div class="hr">
+                            <hr>
+                        </div>
+                        <div class="price_by_night">
+                            <p>$65</p>
+                        </div>
+                        <div class="information">
+                            <div class="max_guest">
+                            <div class="icon">
+                            </div>
+                                <p>2 Guests</p>
+                            </div>
+                            <div class="number_rooms">
+                            <div class="icon2">
+                            </div>
+                                <p>1 Bedroom</p>
+                            </div>
+                            <div class="number_bathrooms">
+                            <div class="icon3">
+                            </div>
+                                <p>1 Bathroom</p>
+                           </div>
+                        </div>
+                        <div class="hr">
+                            <hr>
+                        </div>
+                        <div class="user">
+                            <p><strong>Owner:</strong> Roisin Byrne</p>
+                        </div>
+                        <div class="description">
+                            <p>Welcome to Ireland, a country full of charm and character! Located on the west coast of Ireland, our vacation rental offers a breathtaking view of the Atlantic Ocean and the steep cliffs of the region.</p>
+                        </div>
+                    </article>
+                    <article><h2>Tiny house</h2>
+                        <div class="hr">
+                            <hr>
+                        </div>
+                        <div class="price_by_night">
+                            <p>$80</p>
+                        </div>
+                        <div class="information">
+                            <div class="max_guest">
+                            <div class="icon">
+                            </div>
+                                <p>4 Guests</p>
+                            </div>
+                            <div class="number_rooms">
+                            <div class="icon2">
+                            </div>
+                                <p>2 Bedroom</p>
+                            </div>
+                            <div class="number_bathrooms">
+                            <div class="icon3">
+                            </div>
+                                <p>1 Bathroom</p>
+                            </div>
+                        </div>
+                        <div class="hr">
+                            <hr>
+                        </div>
+                        <div class="user">
+                            <p><strong>Owner:</strong> Francesca Canelli</p>
+                        </div>
+                        <div class="description">
+                            <p>Welcome to our lovely vacation rental in Italy! Our cozy home is perfect for groups of up to 4 people, with 2 comfortable bedrooms and 1 shared bathroom. At just $65 per night, our rental offers excellent value for those seeking a budget-friendly vacation in beautiful Italy.</p>
+                        </div>
+                    </article>
+                    <article><h2>A suite</h2>
+                        <div class="hr">
+                            <hr>
+                        </div>
+                        <div class="price_by_night">
+                            <p>$180</p>
+                        </div>
+                        <div class="information">
+                            <div class="max_guest">
+                            <div class="icon">
+                            </div>
+                                <p>6 Guests</p>
+                            </div>
+                            <div class="number_rooms">
+                            <div class="icon2">
+                            </div>
+                                <p>4 Bedroom</p>
+                            </div>
+                            <div class="number_bathrooms">
+                            <div class="icon3">
+                            </div>
+                                <p>2 Bathroom</p>
+                            </div>
+                        </div>
+                        <div class="hr">
+                            <hr>
+                        </div>
+                        <div class="user">
+                            <p><strong>Owner:</strong> John Wick</p>
+                        </div>
+                        <div class="description">
+                            <p>Welcome to our luxurious vacation rental in Miami! With 7 spacious bedrooms and 3 bathrooms, our stunning home can comfortably accommodate up to 6 guests. At just $190 per night, this rental offers unbeatable value for those seeking a high-end vacation experience in beautiful Miami.</p>
+                        </div>
+                    </article> 
+            </section>
+        </div>
+    <footer>
+        <p>Holberton School</p>
+    </footer>
+    </body>
+</html>
